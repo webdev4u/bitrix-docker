@@ -1,0 +1,51 @@
+version: '3'
+
+services:
+  nginx:
+    build: ./nginx
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - ${SITE_PATH}:/var/www/html
+    networks:
+      proxy:
+        ipv4_address: 192.168.0.10
+    restart: on-failure
+
+  # Webservers
+
+  backend:
+    build: ./httpd
+    volumes:
+      - ${SITE_PATH}:/var/www/html
+    networks:
+      proxy:
+        ipv4_address: 192.168.0.20
+      backend:
+    restart: on-failure
+
+  # Databases
+
+  db:
+    build: ./mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    volumes:
+      - data:/var/lib/mysql
+    networks:
+      - backend
+    restart: on-failure
+
+networks:
+  proxy:
+    ipam:
+      config:
+        - subnet: 192.168.0.0/24
+  backend:
+
+volumes:
+  data:
