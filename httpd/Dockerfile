@@ -1,4 +1,4 @@
-FROM php:7.1-apache
+FROM php:7.2-apache
 
 # provision with configs
 ADD conf/modules.conf /etc/apache2/conf-enabled/

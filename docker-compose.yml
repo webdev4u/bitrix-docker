@@ -9,8 +9,7 @@ services:
     volumes:
       - ${SITE_PATH}:/var/www/html
     networks:
-      proxy:
-        ipv4_address: 192.168.0.10
+      - proxy
     restart: on-failure
 
   # Webservers
@@ -20,9 +19,8 @@ services:
     volumes:
       - ${SITE_PATH}:/var/www/html
     networks:
-      proxy:
-        ipv4_address: 192.168.0.20
-      backend:
+      - proxy
+      - backend
     restart: on-failure
 
   # Databases
@@ -42,9 +40,6 @@ services:
 
 networks:
   proxy:
-    ipam:
-      config:
-        - subnet: 192.168.0.0/24
   backend:
 
 volumes:
