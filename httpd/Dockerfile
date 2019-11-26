@@ -10,7 +10,7 @@ RUN ln -s /etc/apache2/mods-available/remoteip.load /etc/apache2/mods-enabled/re
 
 # update system
 RUN apt-get update > /dev/null \ 
-    &&  apt-get install -qy zlib1g-dev libldb-dev libldap2-dev libmcrypt-dev libpng-dev libjpeg62-turbo-dev libfreetype6-dev \
+    &&  apt-get install -qy libzip-dev libldb-dev libldap2-dev libmcrypt-dev libpng-dev libjpeg62-turbo-dev libfreetype6-dev \
     && apt-get clean > /dev/null
 
 # install GD
@@ -21,9 +21,9 @@ RUN     docker-php-ext-configure gd \
     &&  docker-php-ext-install gd > /dev/null
 
 # install other Exts
-RUN     docker-php-ext-install zip > /dev/null \
+RUN    docker-php-ext-configure zip --with-libzip > /dev/null \
+    && docker-php-ext-install zip > /dev/null \
     &&  docker-php-ext-install ldap > /dev/null \
-    &&  docker-php-ext-install mcrypt > /dev/null \
     &&  docker-php-ext-install opcache > /dev/null \
     &&  docker-php-ext-install mysqli > /dev/null
 
