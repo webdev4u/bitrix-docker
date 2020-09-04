@@ -43,4 +43,17 @@ networks:
   backend:
 
 volumes:
-  data:
+  bitrix_db_data:
+    driver: local
+  bitrix_etc_nginx:
+    driver: local
+  bitrix_etc_apache:
+    driver: local
+  bitrix_etc_letsencrypt:
+    driver: local
+  bitrix_etc_php:
+    driver: local
+  bitrix_etc_mysql:
+    driver: local
+  bitrix_var_www:
+    driver: local
