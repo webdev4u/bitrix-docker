@@ -25,6 +25,18 @@ RUN    docker-php-ext-configure zip --with-libzip > /dev/null \
     && docker-php-ext-install zip > /dev/null \
     &&  docker-php-ext-install ldap > /dev/null \
     &&  docker-php-ext-install opcache > /dev/null \
+    &&  docker-php-ext-install xml > /dev/null \
+    &&  docker-php-ext-install xmlreader > /dev/null \
+    &&  docker-php-ext-install xmlwriter > /dev/null \
+    &&  docker-php-ext-install xmlrpc > /dev/null \
+    &&  docker-php-ext-install bz2 > /dev/null \
+    &&  docker-php-ext-install xdebug > /dev/null \
+    &&  docker-php-ext-install calendar > /dev/null \
+    &&  docker-php-ext-install ctype > /dev/null \
+    &&  docker-php-ext-install curl > /dev/null \
+    &&  docker-php-ext-install mbstring > /dev/null \
+    &&  docker-php-ext-install dom > /dev/null \
+    &&  docker-php-ext-install json > /dev/null \
     &&  docker-php-ext-install mysqli > /dev/null
 
 # change container uid according to host user

@@ -7,7 +7,8 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-      - ${SITE_PATH}:/var/www/html
+      - bitrix_var_www:/var/www/html
+      - bitrix_etc_nginx:/etc/nginx
     networks:
       - proxy
     restart: on-failure
@@ -17,7 +18,7 @@ services:
   backend:
     build: ./httpd
     volumes:
-      - ${SITE_PATH}:/var/www/html
+      - bitrix_var_www:/var/www/html
     networks:
       - proxy
       - backend
@@ -33,7 +34,7 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
     volumes:
-      - data:/var/lib/mysql
+      - bitrix_db_data:/var/lib/mysql
     networks:
       - backend
     restart: on-failure
@@ -56,4 +57,6 @@ volumes:
   bitrix_etc_mysql:
     driver: local
   bitrix_var_www:
+    driver: local
+  bitrix_etc_robocert:
     driver: local
